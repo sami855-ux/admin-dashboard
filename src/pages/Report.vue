@@ -1,16 +1,7 @@
 <script setup>
 import { ref, h, onMounted, onUnmounted } from "vue"
-import { Bar } from "vue-chartjs"
 import { useRouter } from "vue-router"
-import {
-  Chart as ChartJS,
-  Title,
-  Tooltip,
-  Legend,
-  BarElement,
-  CategoryScale,
-  LinearScale,
-} from "chart.js"
+import { format } from "date-fns"
 import {
   useVueTable,
   FlexRender,
@@ -45,6 +36,12 @@ const pendingColumns = [
   {
     accessorKey: "dateCreated",
     header: "Data created",
+    cell: ({ row }) => {
+      const createdAt = row.original.dateCreated
+      const formattedDate = format(new Date(createdAt), "MMMM dd, yyyy") // Customize the format as needed
+
+      return h("span", {}, formattedDate)
+    },
   },
   {
     accessorKey: "createdBy",
@@ -112,34 +109,6 @@ const table = useVueTable({
   },
 })
 
-ChartJS.register(Title, Tooltip, Legend, BarElement, CategoryScale, LinearScale)
-
-const chartData = ref({
-  labels: ["Jan", "Feb", "Mar", "Apr", "May", "Jun"],
-  datasets: [
-    {
-      label: "New Customers",
-      data: [50, 75, 100, 120, 200, 250], // Replace with real data
-      backgroundColor: "rgba(75, 192, 192, 0.5)",
-      borderColor: "rgba(75, 192, 192, 1)",
-      borderWidth: 1,
-    },
-  ],
-})
-
-const chartDatatwo = ref({
-  labels: ["Users", "Orders", "Revenue", "Activity"], // Labels for the categories
-  datasets: [
-    {
-      label: "Stats Overview",
-      data: [120, 200, 150, 300], // Sample data for each category
-      backgroundColor: ["#FF6384", "#36A2EB", "#FFCE56", "#4BC0C0"], // Different colors for each bar
-      borderColor: ["#FF6384", "#36A2EB", "#FFCE56", "#4BC0C0"],
-      borderWidth: 1,
-    },
-  ],
-})
-
 const transaction = ref({
   labels: ["Completed", "Pending"], // Categories
   datasets: [
@@ -155,185 +124,204 @@ const transaction = ref({
 const pendingData = ref(pending)
 const miniModal = ref(null)
 const isMiniModalOpen = ref(false)
-
-const chartOptions = ref({
-  responsive: true,
-  maintainAspectRatio: false,
-  scales: {
-    y: {
-      beginAtZero: true,
-    },
-  },
-})
 </script>
 
 <template>
   <div class="w-full h-fit">
-    <span
-      @click="router.back(-1)"
-      class="w-10 cursor-pointer h-10 rounded-full flex items-center justify-center py-4 border border-gray-300 hover:bg-gray-200 transition duration-75"
-    >
-      <i class="pi pi-angle-left text-xl"></i>
-    </span>
+    <div class="w-fit h-fit flex items-center space-x-3 pb-5">
+      <span
+        @click="router.back(-1)"
+        class="w-8 cursor-pointer h-7 rounded-full flex items-center justify-center py-4 border border-gray-300 hover:bg-gray-200 transition duration-75"
+      >
+        <i class="pi pi-angle-left"></i>
+      </span>
+      <p class="text-semibold text-[16px] py-4">Dashboard - Report</p>
+    </div>
+    <div class="w-full min-h-[280px] flex gap-3 flex-wrap mx-1 md:mx-0 mb-7">
+      <AdminCard
+        title="Total Customer"
+        iconName="pi-user-plus"
+        number="6"
+        :change="-20"
+        bg="bg-[#06cf06]"
+      />
+      <AdminCard
+        title="Total Employees"
+        iconName=" pi-id-card"
+        number="16"
+        bg="bg-[#d53718]"
+      />
+      <AdminCard
+        title="Total Transaction"
+        iconName="pi-chart-line"
+        number="25"
+        :change="50"
+        bg="bg-[#cd0e64]"
+      />
+      <AdminCard
+        title="Pending Transaction"
+        iconName="pi-clock"
+        number="3"
+        :change="-10"
+        bg="bg-[#0ab044]"
+      />
+      <AdminCard
+        title="Completed Transaction"
+        iconName="pi-check-circle"
+        number="7"
+        :change="-5"
+        bg="bg-[#102dac]"
+      />
+      <AdminCard
+        title="Total categories"
+        iconName="pi-tags"
+        number="3"
+        :change="5"
+      />
+      <AdminCard
+        title="Completed Transaction"
+        iconName="pi-check-circle"
+        number="7"
+        :change="-10"
+        bg="bg-[#a70b38]"
+      />
+      <AdminCard
+        title="Total categories"
+        iconName="pi-tags"
+        number="3"
+        :change="15"
+        bg="bg-[#0ab044]"
+      />
+    </div>
+    <div class="w-full h-fit">
+      <div class="w-full min-h-10 flex items-center justify-between pr-16 my-2">
+        <div class="">
+          <input
+            type="text"
+            placeholder="Type for filter..."
+            v-model="filter"
+            class="border border-custom-two rounded-md outline-none text-[13px] focus:border-blue-600 px-7 py-1 my-1"
+          />
+        </div>
+        <div class="h-full w-fit ml-5">
+          <div class="w-full flex gap-5 items-center justify-self-end">
+            <p class="text-custom text-[14px] hidden md:block">Page size</p>
+            <select
+              @change="(e) => handleChangeSize(parseInt(e.target.value))"
+              class="px-7 outline-none border border-custom rounded-md text-[14px] py-1 bg-custom"
+            >
+              <option value="5">5</option>
+              <option value="10">10</option>
+              <option value="15">15</option>
+              <option value="20">20</option>
+            </select>
 
-    <div class="w-full h-10 flex justify-between items-center pr-16 mt-5">
-      <p class="text-semibold text-lg py-4">Dashboard - Transaction Report</p>
-    </div>
-    <div class="w-full h-fit pb-10">
-      <div class="w-full h-[270px] flex gap-7 flex-col lg:flex-row">
-        <div class="w-[90%] md:w-[500px] h-full rounded-lg">
-          <Bar v-if="chartData" :data="chartData" :options="chartOptions" />
-          <h2 class="text-gray-700">Customer Growth</h2>
+            <i
+              class="pi pi-ellipsis-v cursor-pointer"
+              title="export"
+              @click="handleModal"
+            ></i>
+            <!-- Mini modal -->
+            <div
+              v-if="isMiniModalOpen"
+              class="fixed top-66 w-48 bg-custom rounded-md border border-custom h-fit p-5 right-16 transition duration-150 ease-in-out"
+            >
+              <p
+                class="text-[14px] py-1 border-b border-gray-200 cursor-pointer mb-1"
+              >
+                Export csv
+              </p>
+              <p
+                class="text-[14px] py-1 border-b border-gray-200 cursor-pointer mb-1"
+              >
+                Export pdf
+              </p>
+              <p class="text-[14px] py-1 cursor-pointer">Export xsl</p>
+            </div>
+          </div>
         </div>
-        <div
-          class="w-fit h-full items-center md:items-start flex gap-4 flex-wrap"
+      </div>
+      <div class="max-w-full overflow-x-scroll">
+        <table
+          class="w-[95%] divide-y divide-gray-200 lg:mr-1 border border-custom-two rounded-2xl"
         >
-          <AdminCard
-            title="Total Customer"
-            iconName="pi-user-plus"
-            number="6"
-          />
-          <AdminCard
-            title="Total Employees"
-            iconName=" pi-id-card"
-            number="16"
-          />
-          <AdminCard
-            title="Total Transaction"
-            iconName="pi-chart-line"
-            number="10"
-          />
-          <AdminCard
-            title="Pending Transaction"
-            iconName="pi-clock"
-            number="3"
-          />
-          <AdminCard
-            title="Completed Transaction"
-            iconName="pi-check-circle"
-            number="7"
-          />
-          <AdminCard title="Total categories" iconName="pi-tags" number="3" />
-        </div>
+          <thead class="header-custom-bg">
+            <tr
+              v-for="headerGroup in table.getHeaderGroups()"
+              :key="headerGroup.id"
+            >
+              <th
+                v-for="header in headerGroup.headers"
+                :key="header.id"
+                scope="col"
+                class="capitalize px-3 py-3 text-left text-[13.5px] font-semibold header-custom"
+                :class="{
+                  'cursor-pointer select-none': header.column.getCanSort(),
+                }"
+                @click="header.column.getToggleSortingHandler()?.($event)"
+              >
+                <FlexRender
+                  :render="header.column.columnDef.header"
+                  :props="header.getContext"
+                />
+                {{ { asc: "⬆", desc: "⬇" }[header.column.getIsSorted()] }}
+              </th>
+            </tr>
+          </thead>
+          <tbody class="divide-y divide-gray-200">
+            <tr
+              v-for="row in table.getRowModel().rows"
+              :key="row.id"
+              class="hover-custom"
+            >
+              <td
+                v-for="cell in row.getVisibleCells()"
+                :key="cell.id"
+                class="whitespace-nowrap px-3 py-3 text-[13px] text-custom"
+              >
+                <FlexRender
+                  :render="cell.column.columnDef.cell"
+                  :props="cell.getContext()"
+                />
+              </td>
+            </tr>
+          </tbody>
+        </table>
       </div>
-      <div class="w-full h-[300px] flex gap-16 flex-col lg:flex-row mt-7 px-20">
-        <div class="w-[50%] md:w-[500px] h-full rounded-lg py-10">
-          <Bar v-if="chartDatatwo" :data="chartDatatwo" class="h-full" />
-          <h2 class="text-gray-700">Status Overview</h2>
-        </div>
-        <div class="w-[50%] md:w-[500px] h-full rounded-lg py-10">
-          <Bar :data="transaction" :options="chartOptions" class="h-full" />
-          <h2 class="text-gray-700">Transaction Overview</h2>
-        </div>
-      </div>
-    </div>
-    <div class="w-full h-10 flex justify-between items-center pr-16 my-5">
-      <div class="">
-        <input
-          type="text"
-          placeholder="Type for filter..."
-          v-model="filter"
-          class="border border-gray-200 rounded-md outline-none px-7 py-1"
-        />
-      </div>
-      <div class="h-full w-fit">
-        <div class="w-full flex space-x-3 items-center">
-          <p class="text-gray-500 py-1">Page size</p>
-          <button
-            class="px-7 py-1 text-gray-500 border border-gray-200 rounded-md cursor-pointer disabled:bg-gray-400 disabled:cursor-not-allowed"
-            @click="table.setPageSize(5)"
-          >
-            5
-          </button>
-          <button
-            class="px-7 py-1 text-gray-500 border border-gray-200 rounded-md cursor-pointer disabled:bg-gray-400 disabled:cursor-not-allowed"
-            @click="table.setPageSize(10)"
-          >
-            10
-          </button>
-          <button
-            class="px-7 py-1 text-gray-500 border border-gray-200 rounded-md cursor-pointer disabled:bg-gray-400 disabled:cursor-not-allowed"
-            @click="table.setPageSize(20)"
-          >
-            20
-          </button>
-          <i class="pi pi-ellipsis-v pl-7 cursor-pointer" title="export"></i>
-        </div>
-      </div>
-    </div>
-    <table class="min-w-full divide-y divide-gray-200">
-      <thead>
-        <tr
-          v-for="headerGroup in table.getHeaderGroups()"
-          :key="headerGroup.id"
-        >
-          <th
-            v-for="header in headerGroup.headers"
-            :key="header.id"
-            scope="col"
-            class="capitalize px-3 py-3.5 text-left text-[15px] font-semibold text-gray-900"
-            :class="{
-              'cursor-pointer select-none': header.column.getCanSort(),
-            }"
-            @click="header.column.getToggleSortingHandler()?.($event)"
-          >
-            <FlexRender
-              :render="header.column.columnDef.header"
-              :props="header.getContext"
-            />
-            {{ { asc: "⬆", desc: "⬇" }[header.column.getIsSorted()] }}
-          </th>
-        </tr>
-      </thead>
-      <tbody class="divide-y divide-gray-200">
-        <tr
-          v-for="row in table.getRowModel().rows"
-          :key="row.id"
-          class="hover:bg-gray-100 transition duration-200 ease-in-out"
-        >
-          <td
-            v-for="cell in row.getVisibleCells()"
-            :key="cell.id"
-            class="whitespace-nowrap px-3 py-4 text-[15px] text-gray-500"
-          >
-            <FlexRender
-              :render="cell.column.columnDef.cell"
-              :props="cell.getContext()"
-            />
-          </td>
-        </tr>
-      </tbody>
-    </table>
-    <div class="w-full flex h-20 justify-between items-center px-14">
-      <!-- Left-aligned section -->
-      <section class="w-fit h-full flex items-center">
-        <p class="text-gray-700 w-fit h-full flex items-center gap-2">
-          Page
-          <span class="font-semibold">{{
-            table.getState().pagination.pageIndex + 1
-          }}</span>
-          out of
-          {{ table.getPageCount() }} -
-          {{ table.getFilteredRowModel().rows.length }} results
-        </p>
-      </section>
 
-      <!-- Right-aligned pagination controls -->
-      <div class="flex space-x-3 items-center">
-        <button
-          class="w-10 h-10 rounded-full text-gray-500 border border-gray-300 cursor-pointer disabled:bg-gray-400 disabled:cursor-not-allowed"
-          :disabled="!table.getCanPreviousPage()"
-          @click="table.previousPage()"
-        >
-          <i class="pi pi-angle-left text-2xl"></i>
-        </button>
-        <button
-          class="w-10 h-10 rounded-full text-gray-500 border border-gray-300 cursor-pointer disabled:bg-gray-400 disabled:cursor-not-allowed"
-          :disabled="!table.getCanNextPage()"
-          @click="table.nextPage()"
-        >
-          <i class="pi pi-angle-right text-2xl"></i>
-        </button>
+      <div class="w-full flex h-20 justify-between items-center px-14">
+        <!-- Left-aligned section -->
+        <section class="w-fit h-full flex items-center">
+          <p
+            class="text-custom w-fit h-full flex items-center gap-2 text-[13px]"
+          >
+            Page
+            <span class="font-semibold">{{
+              table.getState().pagination.pageIndex + 1
+            }}</span>
+            out of
+            {{ table.getPageCount() }} -
+            {{ table.getFilteredRowModel().rows.length }} results
+          </p>
+        </section>
+
+        <!-- Right-aligned pagination controls -->
+        <div class="flex space-x-3 items-center">
+          <button
+            class="w-7 h-7 pt-1 rounded-full text-custom border border-gray-300 cursor-pointer disabled:bg-gray-400 disabled:cursor-not-allowed"
+            :disabled="!table.getCanPreviousPage()"
+            @click="table.previousPage()"
+          >
+            <i class="pi pi-angle-left text-xl"></i>
+          </button>
+          <button
+            class="w-7 h-7 pt-1 rounded-full text-custom border border-gray-300 cursor-pointer disabled:bg-gray-400 disabled:cursor-not-allowed"
+            :disabled="!table.getCanNextPage()"
+            @click="table.nextPage()"
+          >
+            <i class="pi pi-angle-right text-xl"></i>
+          </button>
+        </div>
       </div>
     </div>
     <!-- Overlay -->
@@ -348,7 +336,7 @@ const chartOptions = ref({
     <div
       :class="` ${
         isModalOpen ? 'right-0' : 'right-[-100%]'
-      } w-[700px] h-screen fixed top-0  z-50 bg-white p-7 border border-gray-100  transition duration-500 ease-in-out overflow-scroll`"
+      } w-[400px] lg:w-[700px] h-screen fixed top-0  z-50 bg-white p-7 border border-gray-100  transition duration-500 ease-in-out overflow-scroll`"
     >
       <i class="pi pi-times text-xl cursor-pointer" @click="handleModal"></i>
 
@@ -360,7 +348,7 @@ const chartOptions = ref({
     <div
       :class="` ${
         isEditModalOpen ? 'right-0' : 'right-[-100%]'
-      } w-[700px] h-screen fixed top-0  z-50 bg-white p-7 border border-gray-100  transition duration-500 ease-in-out overflow-scroll`"
+      } w-[700px] hidden md:block h-screen fixed top-0  z-50 bg-white p-7 border border-gray-100  transition duration-500 ease-in-out overflow-scroll`"
     >
       <i
         class="pi pi-times text-xl cursor-pointer"

@@ -8,7 +8,9 @@ import Menu from "./Menu.vue"
 <template>
   <div class="dashboard">
     <Menu />
-    <div class="flex flex-col gap-2 content px-10 lg:px-0 lg:ml-[260px]">
+    <div
+      class="w-[79vw] lg:w-full flex flex-col gap-2 content px-10 lg:px-0 lg:ml-[260px]"
+    >
       <AdminNavbar />
       <RouterView />
     </div>

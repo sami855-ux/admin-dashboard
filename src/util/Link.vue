@@ -1,5 +1,6 @@
 <script setup>
 import { RouterLink } from "vue-router"
+import { watch, ref, onMounted, onBeforeUnmount } from "vue"
 
 const { path, name, iconName, isLargeScreen, handleMenu } = defineProps({
   path: {
@@ -13,12 +14,32 @@ const { path, name, iconName, isLargeScreen, handleMenu } = defineProps({
   iconName: String,
   isLargeScreen: {
     type: Boolean,
-    default: false,
   },
   handleMenu: {
     type: Function,
     default: () => {},
   },
+})
+
+const screenWidth = ref(window.innerWidth)
+
+const handleClick = () => {
+  if (screenWidth.value < 1024) {
+    handleMenu()
+  }
+}
+
+const updateScreenWidth = () => {
+  screenWidth.value = window.innerWidth
+}
+
+onMounted(() => {
+  screenWidth.value = window.innerWidth
+  window.addEventListener("resize", updateScreenWidth)
+})
+
+onBeforeUnmount(() => {
+  window.removeEventListener("resize", updateScreenWidth)
 })
 </script>
 
@@ -26,15 +47,9 @@ const { path, name, iconName, isLargeScreen, handleMenu } = defineProps({
   <RouterLink
     class="link flex items-center space-x-2.5 relative"
     :to="path"
-    @click="
-      () => {
-        if (isLargeScreen) return
-
-        handleMenu()
-      }
-    "
+    @click="handleClick"
   >
-    <i :class="`pi ${iconName} `"></i>
-    <p class="text-gray-900 text-[13px] block">{{ name }}</p>
+    <i :class="`pi ${iconName} text-custom`"></i>
+    <p class="text-custom text-[14px] block">{{ name }}</p>
   </RouterLink>
 </template>

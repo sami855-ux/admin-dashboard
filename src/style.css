@@ -2,10 +2,74 @@
 
 @import "tailwindcss";
 
+:root {
+  --bg-color: #ffffff;
+  --text-color: #000000;
+  --menu-color: #d3e0f3;
+  --card-color: #e6f0fd;
+  --border-color: #e8e9ec;
+  --border-color-two: #e8f1f8;
+  --header-color: #2a2a2c;
+  --header-bg-color: #d4d4df;
+  --pending-color: #f9d0d0;
+  --completed-color: #c5f5c7;
+}
+
+[data-theme="dark"] {
+  --bg-color: #2d3d47;
+  --text-color: #ecedee;
+  --menu-color: #1e2e38;
+  --card-color: #28343c;
+  --border-color: #2f3237;
+  --border-color-two: #253443;
+  --header-color: #e6e6f1;
+  --pending-color: #5a4949;
+  --completed-color: #608161;
+  --header-bg-color: #1e2e38;
+}
+
+body {
+  background-color: var(--bg-color);
+  color: var(--text-color);
+}
+
 * {
   @apply font-['Inter'];
-  /* color: rgba(45, 107, 192,0.75); */
+  /* color: #1c6e91; */
 }
 *::-webkit-scrollbar {
   display: none;
+}
+.bg-pending {
+  background-color: var(--pending-color);
+}
+.bg-completed {
+  background-color: var(--completed-color);
+}
+.bg-color {
+  background-color: var(--bg-color);
+}
+.bg-custom {
+  background-color: var(--menu-color);
+}
+.text-custom {
+  color: var(--text-color);
+}
+.header-custom {
+  color: var(--header-color);
+}
+.header-custom-bg {
+  background-color: var(--header-bg-color);
+}
+.border-custom {
+  border-color: var(--border-color);
+}
+.border-custom-two {
+  border-color: var(--border-color-two);
+}
+.card-custom {
+  background-color: var(--card-color);
+}
+.hover-custom:hover {
+  background-color: var(--menu-color);
 }
