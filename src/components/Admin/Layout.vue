@@ -8,7 +8,7 @@ import Menu from "./Menu.vue"
 <template>
   <div class="dashboard">
     <Menu />
-    <div class="flex flex-col gap-4 content ml-28 md:ml-[320px]">
+    <div class="flex flex-col gap-2 content px-10 lg:px-0 lg:ml-[260px]">
       <AdminNavbar />
       <RouterView />
     </div>
@@ -19,7 +19,7 @@ import Menu from "./Menu.vue"
 .dashboard {
   display: flex;
   height: 100vh;
-  gap: 25px;
+  gap: 5px;
 }
 .content {
   flex-grow: 1;

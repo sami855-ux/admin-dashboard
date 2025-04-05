@@ -1,0 +1,42 @@
+[
+  {
+    "id": 1,
+    "dateCreated": "2025-03-31T08:30:00Z",
+    "createdBy": "AdminUser1",
+    "backupFileName": "backup_full_2025-03-31.zip",
+    "fileSize": "2.5GB",
+    "backupType": "Full"
+  },
+  {
+    "id": 2,
+    "dateCreated": "2025-03-30T22:15:00Z",
+    "createdBy": "AdminUser2",
+    "backupFileName": "backup_db_2025-03-30.sql",
+    "fileSize": "350MB",
+    "backupType": "Database-only"
+  },
+  {
+    "id": 3,
+    "dateCreated": "2025-03-29T18:45:00Z",
+    "createdBy": "AdminUser1",
+    "backupFileName": "backup_files_2025-03-29.zip",
+    "fileSize": "1.2GB",
+    "backupType": "Files-only"
+  },
+  {
+    "id": 4,
+    "dateCreated": "2025-03-28T10:10:00Z",
+    "createdBy": "AdminUser3",
+    "backupFileName": "backup_full_2025-03-28.zip",
+    "fileSize": "2.8GB",
+    "backupType": "Full"
+  },
+  {
+    "id": 5,
+    "dateCreated": "2025-03-27T07:20:00Z",
+    "createdBy": "AdminUser2",
+    "backupFileName": "backup_db_2025-03-27.sql",
+    "fileSize": "400MB",
+    "backupType": "Database-only"
+  }
+]

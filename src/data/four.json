@@ -1,0 +1,79 @@
+[
+  {
+    "id": 1,
+    "code": 2,
+    "fullName": "Meaza Dagne",
+    "phone": "0999001122",
+    "sex": "Female",
+    "email": "meaza.dagne@example.com",
+    "joinedAt": "2300",
+    "createdAt": "2023-04-10",
+    "createdBy": "Samuel Tale"
+  },
+  {
+    "id": 2,
+    "code": 3,
+    "fullName": "Biniam Yosef",
+    "phone": "0911223344",
+    "sex": "Male",
+    "email": "biniam.yosef@example.com",
+    "joinedAt": "2200",
+    "createdAt": "2023-04-11",
+    "createdBy": "Samuel Tale"
+  },
+  {
+    "id": 3,
+    "code": 4,
+    "fullName": "Lidya Melaku",
+    "phone": "0922334455",
+    "sex": "Female",
+    "email": "lidya.melaku@example.com",
+    "joinedAt": "2100",
+    "createdAt": "2023-04-12",
+    "createdBy": "Samuel Tale"
+  },
+  {
+    "id": 4,
+    "code": 5,
+    "fullName": "Henok Birhanu",
+    "phone": "0933445566",
+    "sex": "Male",
+    "email": "henok.birhanu@example.com",
+    "joinedAt": "2400",
+    "createdAt": "2023-04-13",
+    "createdBy": "Samuel Tale"
+  },
+  {
+    "id": 5,
+    "code": 6,
+    "fullName": "Meklit Fikadu",
+    "phone": "0944556677",
+    "sex": "Female",
+    "email": "meklit.fikadu@example.com",
+    "joinedAt": "2500",
+    "createdAt": "2023-04-14",
+    "createdBy": "Samuel Tale"
+  },
+  {
+    "id": 6,
+    "code": 7,
+    "fullName": "Tesfaye Alemayehu",
+    "phone": "0955667788",
+    "sex": "Male",
+    "email": "tesfaye.alemayehu@example.com",
+    "joinedAt": "2600",
+    "createdAt": "2023-04-15",
+    "createdBy": "Samuel Tale"
+  },
+  {
+    "id": 7,
+    "code": 8,
+    "fullName": "Rahel Wondimu",
+    "phone": "0966778899",
+    "sex": "Female",
+    "email": "rahel.wondimu@example.com",
+    "joinedAt": "2700",
+    "createdAt": "2023-04-16",
+    "createdBy": "Samuel Tale"
+  }
+]

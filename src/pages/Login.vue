@@ -48,7 +48,7 @@ const handleGoogleSubmit = () => {
     class="wrapper w-screen h-screen flex items-center justify-center md:justify-end pr-36"
   >
     <form
-      class="form_container w-full md:w-[600px] shadow-gray-400"
+      class="form_container w-full md:w-[470px] shadow-gray-400 border border-gray-100"
       @submit.prevent="handleSubmit"
     >
       <div class="logo_container">
@@ -64,7 +64,7 @@ const handleGoogleSubmit = () => {
           securing positions.</span
         >
         <p
-          class="text-gray-500 w-full h-16 rounded-lg bg-red-200/75 flex items-center justify-center my-2"
+          class="text-gray-500 w-full h-7 text-[13px] rounded-lg bg-red-200/75 flex items-center justify-center py-4"
           v-if="state.errormsg"
         >
           {{ state.errormsg }}
@@ -211,15 +211,14 @@ const handleGoogleSubmit = () => {
   gap: 15px;
   padding: 70px 40px 20px 60px;
   background-color: #fffafa;
-
   border-radius: 11px;
   font-family: "Inter", sans-serif;
 }
 
 .logo_container {
   box-sizing: border-box;
-  width: 100px;
-  height: 100px;
+  width: 70px;
+  height: 70px;
   border: 1px solid #f7f7f8;
   border-radius: 11px;
 }
@@ -235,14 +234,14 @@ const handleGoogleSubmit = () => {
 .title {
   text-align: center;
   margin: 0;
-  font-size: 1.7rem;
+  font-size: 1rem;
   font-weight: 700;
   color: #212121;
 }
 
 .subtitle {
   text-align: center;
-  font-size: 1rem;
+  font-size: 0.8rem;
   text-align: center;
   line-height: 1.1rem;
   color: #8b8e98;
@@ -258,7 +257,7 @@ const handleGoogleSubmit = () => {
 }
 
 .icon {
-  width: 20px;
+  width: 17px;
   position: absolute;
   z-index: 99;
   left: 12px;
@@ -266,9 +265,9 @@ const handleGoogleSubmit = () => {
 }
 
 .input_label {
-  font-size: 0.75rem;
+  font-size: 0.7rem;
   color: #8b8e98;
-  font-weight: 600;
+  font-weight: 500;
 }
 
 .input_field {
@@ -276,6 +275,7 @@ const handleGoogleSubmit = () => {
   height: 40px;
   padding: 0 0 0 40px;
   border-radius: 7px;
+  font-size: 0.8rem;
   outline: none;
   border: 1px solid #e5e5e5;
   filter: drop-shadow(0px 1px 0px #efefef)
@@ -298,6 +298,7 @@ const handleGoogleSubmit = () => {
   outline: none;
   color: #ffffff;
   cursor: pointer;
+  font-size: 0.8rem;
 }
 
 .sign-in_ggl {
@@ -306,6 +307,7 @@ const handleGoogleSubmit = () => {
   display: flex;
   align-items: center;
   justify-content: center;
+  font-size: 0.8rem;
   gap: 10px;
   background: #ffffff;
   border-radius: 7px;
@@ -355,5 +357,6 @@ const handleGoogleSubmit = () => {
   font-size: 0.75rem;
   color: #8b8e98;
   text-decoration: underline;
+  font-size: 0.8rem;
 }
 </style>

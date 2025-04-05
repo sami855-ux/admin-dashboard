@@ -1,0 +1,252 @@
+[
+  {
+    "id": 1,
+    "customerName": "Samuel Tale",
+    "customerPhone": "0978109304",
+    "customerSex": "Male",
+    "service": "Spa",
+    "price": "2500",
+    "createdAt": "2023-03-18",
+    "status": "pending"
+  },
+  {
+    "id": 2,
+    "customerName": "Helen Abebe",
+    "customerPhone": "0912345678",
+    "customerSex": "Female",
+    "service": "Haircut",
+    "price": "1500",
+    "createdAt": "2023-03-19",
+    "status": "pending"
+  },
+  {
+    "id": 3,
+    "customerName": "Mikiyas Daniel",
+    "customerPhone": "0987654321",
+    "customerSex": "Male",
+    "service": "Massage",
+    "price": "3000",
+    "createdAt": "2023-03-20",
+    "status": "pending"
+  },
+  {
+    "id": 4,
+    "customerName": "Sara Tesfaye",
+    "customerPhone": "0965123789",
+    "customerSex": "Female",
+    "service": "Facial Treatment",
+    "price": "2800",
+    "createdAt": "2023-03-21",
+    "status": "pending"
+  },
+  {
+    "id": 5,
+    "customerName": "Daniel Worku",
+    "customerPhone": "0978991122",
+    "customerSex": "Male",
+    "service": "Body Scrub",
+    "price": "3200",
+    "createdAt": "2023-03-22",
+    "status": "pending"
+  },
+  {
+    "id": 6,
+    "customerName": "Lidia Alemu",
+    "customerPhone": "0922334455",
+    "customerSex": "Female",
+    "service": "Manicure",
+    "price": "1800",
+    "createdAt": "2023-03-23",
+    "status": "pending"
+  },
+  {
+    "id": 7,
+    "customerName": "Tewodros Mulu",
+    "customerPhone": "0933445566",
+    "customerSex": "Male",
+    "service": "Hair Styling",
+    "price": "3500",
+    "createdAt": "2023-03-24",
+    "status": "pending"
+  },
+  {
+    "id": 8,
+    "customerName": "Bethel Tadesse",
+    "customerPhone": "0944556677",
+    "customerSex": "Female",
+    "service": "Pedicure",
+    "price": "1600",
+    "createdAt": "2023-03-25",
+    "status": "pending"
+  },
+  {
+    "id": 9,
+    "customerName": "Yosef Getahun",
+    "customerPhone": "0955667788",
+    "customerSex": "Male",
+    "service": "Hot Stone Massage",
+    "price": "4500",
+    "createdAt": "2023-03-26",
+    "status": "pending"
+  },
+  {
+    "id": 10,
+    "customerName": "Selamawit Kassahun",
+    "customerPhone": "0966778899",
+    "customerSex": "Female",
+    "service": "Facial Treatment",
+    "price": "2900",
+    "createdAt": "2023-03-27",
+    "status": "pending"
+  },
+  {
+    "id": 11,
+    "customerName": "Henok Desalegn",
+    "customerPhone": "0977889900",
+    "customerSex": "Male",
+    "service": "Shaving",
+    "price": "1200",
+    "createdAt": "2023-03-28",
+    "status": "pending"
+  },
+  {
+    "id": 12,
+    "customerName": "Marta Kebede",
+    "customerPhone": "0988990011",
+    "customerSex": "Female",
+    "service": "Hair Coloring",
+    "price": "4000",
+    "createdAt": "2023-03-29",
+    "status": "pending"
+  },
+  {
+    "id": 13,
+    "customerName": "Kaleb Birhanu",
+    "customerPhone": "0999001122",
+    "customerSex": "Male",
+    "service": "Deep Tissue Massage",
+    "price": "5000",
+    "createdAt": "2023-03-30",
+    "status": "pending"
+  },
+  {
+    "id": 14,
+    "customerName": "Abel Tsegaye",
+    "customerPhone": "0900112233",
+    "customerSex": "Male",
+    "service": "Reflexology",
+    "price": "2700",
+    "createdAt": "2023-04-01",
+    "status": "pending"
+  },
+  {
+    "id": 15,
+    "customerName": "Hana Solomon",
+    "customerPhone": "0911223344",
+    "customerSex": "Female",
+    "service": "Bridal Makeup",
+    "price": "6000",
+    "createdAt": "2023-04-02",
+    "status": "pending"
+  },
+  {
+    "id": 16,
+    "customerName": "Nahom Melaku",
+    "customerPhone": "0922334455",
+    "customerSex": "Male",
+    "service": "Beard Trim",
+    "price": "1700",
+    "createdAt": "2023-04-03",
+    "status": "pending"
+  },
+  {
+    "id": 17,
+    "customerName": "Tinsae Mekonnen",
+    "customerPhone": "0933445566",
+    "customerSex": "Female",
+    "service": "Eyebrow Threading",
+    "price": "1100",
+    "createdAt": "2023-04-04",
+    "status": "pending"
+  },
+  {
+    "id": 18,
+    "customerName": "Amanuel Yonas",
+    "customerPhone": "0944556677",
+    "customerSex": "Male",
+    "service": "Haircut & Styling",
+    "price": "3800",
+    "createdAt": "2023-04-05",
+    "status": "pending"
+  },
+  {
+    "id": 19,
+    "customerName": "Ruth Samuel",
+    "customerPhone": "0955667788",
+    "customerSex": "Female",
+    "service": "Makeup Session",
+    "price": "4500",
+    "createdAt": "2023-04-06",
+    "status": "pending"
+  },
+  {
+    "id": 20,
+    "customerName": "Yonas Haile",
+    "customerPhone": "0966778899",
+    "customerSex": "Male",
+    "service": "Full Body Massage",
+    "price": "5200",
+    "createdAt": "2023-04-07",
+    "status": "pending"
+  },
+  {
+    "id": 21,
+    "customerName": "Eden Gashaw",
+    "customerPhone": "0977889900",
+    "customerSex": "Female",
+    "service": "Hair Extensions",
+    "price": "4700",
+    "createdAt": "2023-04-08",
+    "status": "pending"
+  },
+  {
+    "id": 22,
+    "customerName": "Dawit Teshome",
+    "customerPhone": "0988990011",
+    "customerSex": "Male",
+    "service": "Hot Towel Shave",
+    "price": "2100",
+    "createdAt": "2023-04-09",
+    "status": "pending"
+  },
+  {
+    "id": 23,
+    "customerName": "Bilen Fekadu",
+    "customerPhone": "0999001122",
+    "customerSex": "Female",
+    "service": "Nail Art",
+    "price": "2300",
+    "createdAt": "2023-04-10",
+    "status": "pending"
+  },
+  {
+    "id": 24,
+    "customerName": "Fikre Hailemariam",
+    "customerPhone": "0900112233",
+    "customerSex": "Male",
+    "service": "Skin Treatment",
+    "price": "3900",
+    "createdAt": "2023-04-11",
+    "status": "pending"
+  },
+  {
+    "id": 25,
+    "customerName": "Selam Mesfin",
+    "customerPhone": "0911223344",
+    "customerSex": "Female",
+    "service": "Hair Relaxing",
+    "price": "2600",
+    "createdAt": "2023-04-12",
+    "status": "pending"
+  }
+]

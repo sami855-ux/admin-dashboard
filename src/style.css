@@ -4,6 +4,7 @@
 
 * {
   @apply font-['Inter'];
+  /* color: rgba(45, 107, 192,0.75); */
 }
 *::-webkit-scrollbar {
   display: none;
