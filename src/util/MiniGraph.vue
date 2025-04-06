@@ -7,7 +7,6 @@
 <script setup>
 import { ref, onMounted, defineProps } from "vue"
 
-// ✅ Use "Chart" as the class to instantiate, not "ChartJS"
 import {
   Chart as ChartJS,
   Chart, // <- This is the class you use to create a chart
@@ -15,10 +14,11 @@ import {
   Tooltip,
   Legend,
   ArcElement,
+  PieController,
 } from "chart.js"
 
 // Register necessary components
-ChartJS.register(Title, Tooltip, Legend, ArcElement)
+ChartJS.register(Title, Tooltip, Legend, ArcElement, PieController)
 
 const props = defineProps({
   chartData: {
