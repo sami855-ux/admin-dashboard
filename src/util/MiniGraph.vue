@@ -8,8 +8,9 @@
 import { ref, onMounted, defineProps } from "vue"
 import { Chart as ChartJS, Title, Tooltip, Legend, ArcElement } from "chart.js"
 
-ChartJS.register(Title, Tooltip, Legend, ArcElement)
+ChartJS.register(Title, Tooltip, Legend, ArcElement, PieController)
 
+import { Pie } from "vue-chartjs"
 const props = defineProps({
   chartData: {
     type: Object,
@@ -21,7 +22,7 @@ const canvas = ref(null)
 
 onMounted(() => {
   new ChartJS(canvas.value, {
-    type: "pie",
+    type: "Pie",
     data: props.chartData,
     options: {
       responsive: true,
