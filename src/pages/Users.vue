@@ -325,11 +325,11 @@ onBeforeUnmount(() => {
     <div
       :class="` ${
         isModalOpen ? 'right-0' : 'right-[-100%]'
-      } w-[400px] md:w-[600px] h-screen fixed top-0  z-50 bg-white p-7 border border-gray-100  transition duration-500 ease-in-out overflow-scroll`"
+      } w-[400px] md:w-[600px] h-screen fixed top-0  z-50 bg-color p-7 border border-custom  transition duration-500 ease-in-out overflow-scroll`"
     >
-      <i class="pi pi-times text-xl cursor-pointer" @click="handleModal"></i>
+      <i class="pi pi-times cursor-pointer" @click="handleModal"></i>
 
-      <h2 class="text-lg font-semibold py-1 mt-3 text-gray-700">
+      <h2 class="text-lg font-semibold py-1 mt-3 text-custom">
         Create User Information
       </h2>
       <UserInput />
@@ -337,7 +337,7 @@ onBeforeUnmount(() => {
     <div
       :class="` ${
         isEditModalOpen ? 'right-0' : 'right-[-100%]'
-      } w-[400px] md:w-[600px] hidden md:flex h-screen fixed top-0  z-50 bg-white p-7 border border-gray-100  transition duration-500 ease-in-out overflow-scroll`"
+      } w-[400px] md:w-[600px] hidden md:block h-screen fixed top-0  z-50 bg-color p-7 border border-custom  transition duration-500 ease-in-out overflow-scroll`"
     >
       <i
         class="pi pi-times text-xl cursor-pointer"
@@ -348,7 +348,7 @@ onBeforeUnmount(() => {
         "
       ></i>
 
-      <h2 class="text-lg font-semibold py-1 mt-3 text-gray-700">
+      <h2 class="text-lg font-semibold py-1 mt-3 text-custom">
         Edit User Information
       </h2>
       <UserInput />
