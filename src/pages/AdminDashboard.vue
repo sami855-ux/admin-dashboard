@@ -327,7 +327,7 @@ onBeforeUnmount(() => {
 
       <div class="w-full h-fit">
         <p class="py-5 text-[17px] text-custom mt-9">Transaction List</p>
-        <div class="w-full min-h-10 flex items-center justify-between pr-16">
+        <div class="w-full min-h-10 flex items-center justify-between lg:pr-16">
           <div class="">
             <input
               type="text"
