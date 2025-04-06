@@ -250,7 +250,7 @@ onBeforeUnmount(() => {
     <div class="w-full min-h-screen">
       <div class="w-full min-h-[270px] flex gap-10 flex-col">
         <div
-          class="w-full min-h-full items-center flex gap-3 flex-wrap mx-1 md:mx-0"
+          class="w-full min-h-full items-center justify-center lg:justify-start flex gap-3 flex-wrap mx-1 md:mx-0"
         >
           <AdminCard
             title="Total Customer"
