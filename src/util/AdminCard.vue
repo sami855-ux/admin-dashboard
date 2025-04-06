@@ -16,7 +16,7 @@ const { iconName, title, number, change, bg } = defineProps({
 
 <template>
   <div
-    class="w-50 lg:w-66 h-[130px] lg:h-[119px] card-custom rounded-xl flex-col p-2 space-x-2 hover:shadow-lg hover:cursor-pointer hover:text-custom transition-all duration-200 ease-in-out"
+    class="w-50 lg:w-[250px] h-[130px] lg:h-[119px] card-custom rounded-xl flex-col p-2 space-x-2 hover:shadow-lg hover:cursor-pointer hover:text-custom transition-all duration-200 ease-in-out"
   >
     <div class="w-full flex">
       <span

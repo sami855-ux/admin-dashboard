@@ -9,7 +9,7 @@ import Menu from "./Menu.vue"
   <div class="dashboard">
     <Menu />
     <div
-      class="w-[79vw] lg:w-full flex flex-col gap-2 content px-10 lg:px-0 lg:ml-[260px]"
+      class="w-[77vw] lg:w-full flex flex-col gap-2 content mx-10 lg:px-0 lg:ml-[260px]"
     >
       <AdminNavbar />
       <RouterView />

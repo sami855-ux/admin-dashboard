@@ -1,12 +1,12 @@
 <script setup>
-import { onMounted, onBeforeUnmount, ref } from "vue"
+import { onMounted, onBeforeUnmount, ref, watch } from "vue"
 import { useRouter } from "vue-router"
 
 import User from "../../assets/user.png"
 import Theme from "../../util/Theme.vue"
 
 const isModalOpen = ref(false)
-const isDarkMode = ref(false)
+const isDarkMode = ref(true)
 const router = useRouter()
 
 const handleEdit = () => {
@@ -32,6 +32,22 @@ const applyTheme = (dark) => {
   document.documentElement.setAttribute("data-theme", dark ? "dark" : "light")
 }
 
+const handleScroll = () => {
+  if (isModalOpen.value) {
+    isModalOpen.value = false
+  }
+}
+
+watch(isModalOpen, (newVal) => {
+  if (newVal) {
+    // If modal is opened, start listening for scroll
+    window.addEventListener("scroll", handleScroll)
+  } else {
+    // Clean up if modal is closed
+    window.removeEventListener("scroll", handleScroll)
+  }
+})
+
 const bodyClickHandler = (event) => {
   const el = event.target
 
@@ -49,9 +65,6 @@ const bodyClickHandler = (event) => {
 
 onMounted(() => {
   document.body.addEventListener("click", bodyClickHandler)
-  // window.addEventListener("scroll", (e) => {
-  //   handleModal()
-  // })
   const darkQuery = window.matchMedia("(prefers-color-scheme: dark)")
   isDarkMode.value = darkQuery.matches
 
@@ -63,7 +76,7 @@ onMounted(() => {
 
 onBeforeUnmount(() => {
   document.body.removeEventListener("click", bodyClickHandler)
-  // window.removeEventListener("scroll")
+  window.removeEventListener("scroll", handleScroll)
 })
 </script>
 
@@ -97,7 +110,6 @@ onBeforeUnmount(() => {
               ? 'opacity-100 top-[55px] visible'
               : 'opacity-0 top-[35px] invisible'
           } fixed modalLayout w-52 lg:w-66 h-[220px] lg:h-[240px] bg-custom top-[35px] right-10 rounded-lg transition-all duration-500 ease-in-out transform flex items-center flex-col p-2 lg:p-5`"
-          id="modal"
         >
           <i
             class="pi pi-times text-sm cursor-pointer text-custom absolute right-3 top-3"

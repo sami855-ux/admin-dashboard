@@ -75,10 +75,14 @@ onBeforeUnmount(() => {
         state.isLargeScreen ? 'hidden' : 'flex'
       } w-16 h-16  flex items-center justify-center relative z-100`"
     >
-      <i
-        class="pi pi-bars cursor-pointer hover:text-gray-600 transition ease-in-out"
-        @click="handleMenu"
-      ></i>
+      <span
+        className="w-10 h-10 rounded-full bg-color flex items-center justify-center"
+      >
+        <i
+          class="pi pi-bars cursor-pointer hover:text-gray-600 transition ease-in-out"
+          @click="handleMenu"
+        ></i>
+      </span>
     </div>
 
     <!-- Overlay -->

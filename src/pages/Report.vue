@@ -1,5 +1,5 @@
 <script setup>
-import { ref, h, onMounted, onUnmounted } from "vue"
+import { ref, h, onMounted, onBeforeUnmount, watch } from "vue"
 import { useRouter } from "vue-router"
 import { format } from "date-fns"
 import {
@@ -124,6 +124,51 @@ const transaction = ref({
 const pendingData = ref(pending)
 const miniModal = ref(null)
 const isMiniModalOpen = ref(false)
+
+const handleModalMini = () => {
+  console.log("hi")
+  isMiniModalOpen.value = !isMiniModalOpen.value
+}
+
+const handleScroll = () => {
+  if (isMiniModalOpen.value) {
+    isMiniModalOpen.value = false
+  }
+}
+
+const bodyClickHandler = (event) => {
+  const el = event.target
+
+  if (isMiniModalOpen.value) {
+    const modalLayout = document.querySelector(".miniModal")
+    const three = document.querySelector(".three")
+
+    console.log(el, modalLayout)
+
+    if (modalLayout && !modalLayout.contains(el) && el !== three) {
+      isMiniModalOpen.value = false
+    }
+  }
+}
+
+watch(isMiniModalOpen, (newVal) => {
+  if (newVal) {
+    // If modal is opened, start listening for scroll
+    window.addEventListener("scroll", handleScroll)
+  } else {
+    // Clean up if modal is closed
+    window.removeEventListener("scroll", handleScroll)
+  }
+})
+
+onMounted(() => {
+  document.body.addEventListener("click", bodyClickHandler)
+})
+
+onBeforeUnmount(() => {
+  window.removeEventListener("scroll", handleScroll)
+  document.body.removeEventListener("click", bodyClickHandler)
+})
 </script>
 
 <template>
@@ -194,7 +239,9 @@ const isMiniModalOpen = ref(false)
       />
     </div>
     <div class="w-full h-fit">
-      <div class="w-full min-h-10 flex items-center justify-between pr-16 my-2">
+      <div
+        class="w-full min-h-10 flex items-center justify-between lg:pr-16 my-2"
+      >
         <div class="">
           <input
             type="text"
@@ -204,7 +251,7 @@ const isMiniModalOpen = ref(false)
           />
         </div>
         <div class="h-full w-fit ml-5">
-          <div class="w-full flex gap-5 items-center justify-self-end">
+          <div class="w-full flex gap-5 items-center justify-self-end relative">
             <p class="text-custom text-[14px] hidden md:block">Page size</p>
             <select
               @change="(e) => handleChangeSize(parseInt(e.target.value))"
@@ -216,27 +263,36 @@ const isMiniModalOpen = ref(false)
               <option value="20">20</option>
             </select>
 
-            <i
-              class="pi pi-ellipsis-v cursor-pointer"
-              title="export"
-              @click="handleModal"
-            ></i>
+            <span class="w-7 h-7 rounded-full hover:header-custom">
+              <i
+                class="pi pi-ellipsis-v cursor-pointer three"
+                title="export"
+                @click="handleModalMini"
+              ></i>
+            </span>
             <!-- Mini modal -->
             <div
               v-if="isMiniModalOpen"
-              class="fixed top-66 w-48 bg-custom rounded-md border border-custom h-fit p-5 right-16 transition duration-150 ease-in-out"
+              class="absolute miniModal top-[30px] w-48 bg-custom rounded-md border border-custom h-fit p-5 right-5 lg:right-5 transition duration-150 ease-in-out"
             >
               <p
-                class="text-[14px] py-1 border-b border-gray-200 cursor-pointer mb-1"
+                class="text-[13px] text-custom py-1 border-b hover:bg-color border-custom cursor-pointer mb-1"
+                @click="handleModalMini"
               >
                 Export csv
               </p>
               <p
-                class="text-[14px] py-1 border-b border-gray-200 cursor-pointer mb-1"
+                class="text-[13px] text-custom py-1 border-b hover:bg-color border-custom cursor-pointer mb-1"
+                @click="handleModalMini"
               >
                 Export pdf
               </p>
-              <p class="text-[14px] py-1 cursor-pointer">Export xsl</p>
+              <p
+                class="text-[13px] text-custom py-1 hover:bg-color cursor-pointer"
+                @click="handleModalMini"
+              >
+                Export xsl
+              </p>
             </div>
           </div>
         </div>

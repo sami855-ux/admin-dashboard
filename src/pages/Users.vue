@@ -1,5 +1,5 @@
 <script setup>
-import { ref, h } from "vue"
+import { ref, h, onMounted, onBeforeUnmount, watch } from "vue"
 import { format, parseISO } from "date-fns"
 import {
   useVueTable,
@@ -17,6 +17,7 @@ const sorting = ref([])
 const filter = ref("")
 const isModalOpen = ref(false)
 const isEditModalOpen = ref(false)
+const isMiniModalOpen = ref(false)
 
 const handleModal = () => {
   isModalOpen.value = !isModalOpen.value
@@ -106,6 +107,50 @@ const table = useVueTable({
 const handleChangeSize = (num) => {
   table.setPageSize(num)
 }
+const handleModalMini = () => {
+  console.log("hi")
+  isMiniModalOpen.value = !isMiniModalOpen.value
+}
+
+const handleScroll = () => {
+  if (isMiniModalOpen.value) {
+    isMiniModalOpen.value = false
+  }
+}
+
+const bodyClickHandler = (event) => {
+  const el = event.target
+
+  if (isMiniModalOpen.value) {
+    const modalLayout = document.querySelector(".miniModal")
+    const three = document.querySelector(".three")
+
+    console.log(el, modalLayout)
+
+    if (modalLayout && !modalLayout.contains(el) && el !== three) {
+      isMiniModalOpen.value = false
+    }
+  }
+}
+
+watch(isMiniModalOpen, (newVal) => {
+  if (newVal) {
+    // If modal is opened, start listening for scroll
+    window.addEventListener("scroll", handleScroll)
+  } else {
+    // Clean up if modal is closed
+    window.removeEventListener("scroll", handleScroll)
+  }
+})
+
+onMounted(() => {
+  document.body.addEventListener("click", bodyClickHandler)
+})
+
+onBeforeUnmount(() => {
+  window.removeEventListener("scroll", handleScroll)
+  document.body.removeEventListener("click", bodyClickHandler)
+})
 </script>
 
 <template>
@@ -151,27 +196,36 @@ const handleChangeSize = (num) => {
               <option value="20">20</option>
             </select>
 
-            <i
-              class="pi pi-ellipsis-v cursor-pointer"
-              title="export"
-              @click="handleModal"
-            ></i>
+            <span class="w-7 h-7 rounded-full hover:header-custom">
+              <i
+                class="pi pi-ellipsis-v cursor-pointer three"
+                title="export"
+                @click="handleModalMini"
+              ></i>
+            </span>
             <!-- Mini modal -->
             <div
               v-if="isMiniModalOpen"
-              class="fixed top-66 w-48 bg-custom rounded-md border border-custom h-fit p-5 right-16 transition duration-150 ease-in-out"
+              class="absolute miniModal top-[200px] w-48 bg-custom rounded-md border border-custom h-fit p-5 right-10 lg:right-20 transition duration-150 ease-in-out"
             >
               <p
-                class="text-[14px] py-1 border-b border-gray-200 cursor-pointer mb-1"
+                class="text-[13px] text-custom py-1 border-b hover:bg-color border-custom cursor-pointer mb-1"
+                @click="handleModalMini"
               >
                 Export csv
               </p>
               <p
-                class="text-[14px] py-1 border-b border-gray-200 cursor-pointer mb-1"
+                class="text-[13px] text-custom py-1 border-b hover:bg-color border-custom cursor-pointer mb-1"
+                @click="handleModalMini"
               >
                 Export pdf
               </p>
-              <p class="text-[14px] py-1 cursor-pointer">Export xsl</p>
+              <p
+                class="text-[13px] text-custom py-1 hover:bg-color cursor-pointer"
+                @click="handleModalMini"
+              >
+                Export xsl
+              </p>
             </div>
           </div>
         </div>
@@ -271,7 +325,7 @@ const handleChangeSize = (num) => {
     <div
       :class="` ${
         isModalOpen ? 'right-0' : 'right-[-100%]'
-      } w-[600px] h-screen fixed top-0  z-50 bg-white p-7 border border-gray-100  transition duration-500 ease-in-out overflow-scroll`"
+      } w-[400px] md:w-[600px] h-screen fixed top-0  z-50 bg-white p-7 border border-gray-100  transition duration-500 ease-in-out overflow-scroll`"
     >
       <i class="pi pi-times text-xl cursor-pointer" @click="handleModal"></i>
 
@@ -283,7 +337,7 @@ const handleChangeSize = (num) => {
     <div
       :class="` ${
         isEditModalOpen ? 'right-0' : 'right-[-100%]'
-      } w-[600px] h-screen fixed top-0  z-50 bg-white p-7 border border-gray-100  transition duration-500 ease-in-out overflow-scroll`"
+      } w-[400px] md:w-[600px] hidden md:flex h-screen fixed top-0  z-50 bg-white p-7 border border-gray-100  transition duration-500 ease-in-out overflow-scroll`"
     >
       <i
         class="pi pi-times text-xl cursor-pointer"
