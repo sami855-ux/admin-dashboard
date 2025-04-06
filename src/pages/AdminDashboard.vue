@@ -26,15 +26,7 @@ import AdminCard from "../util/AdminCard.vue"
 import pending from "../data/pendingTran.json"
 import MiniGraph from "../util/MiniGraph.vue"
 
-ChartJS.register(
-  Title,
-  Tooltip,
-  Legend,
-  BarElement,
-  CategoryScale,
-  LinearScale,
-  PieController
-)
+ChartJS.register(Title, Tooltip, Legend, BarElement, CategoryScale, LinearScale)
 
 const router = useRouter()
 const chartData = ref({
