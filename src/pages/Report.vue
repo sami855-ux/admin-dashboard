@@ -182,7 +182,9 @@ onBeforeUnmount(() => {
       </span>
       <p class="text-semibold text-[16px] py-4">Dashboard - Report</p>
     </div>
-    <div class="w-full min-h-[280px] flex gap-3 flex-wrap mx-1 md:mx-0 mb-7">
+    <div
+      class="w-full min-h-[280px] flex items-center justify-center lg:justify-start gap-3 flex-wrap mx-1 md:mx-0 mb-7"
+    >
       <AdminCard
         title="Total Customer"
         iconName="pi-user-plus"
